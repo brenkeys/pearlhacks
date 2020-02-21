@@ -5,7 +5,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FileIOUtils {
 
@@ -83,5 +85,17 @@ public class FileIOUtils {
     Integer id = Integer.valueOf(values[0]);
     delete(id);
     write(line);
+  }
+
+  public static Integer nextId(){
+    Integer maxId = 0;
+    List<Integer> ids = readAll().stream()
+        .map(line -> Integer.valueOf(line.split(CSV_SEPARATOR)[0]))
+        .collect(Collectors.toList());
+
+    if(!ids.isEmpty()){
+      maxId = Collections.max(ids);
+    }
+    return maxId + 1;
   }
 }

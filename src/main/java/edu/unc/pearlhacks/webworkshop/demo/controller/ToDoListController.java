@@ -21,7 +21,8 @@ public class ToDoListController {
   @GetMapping(value = "/")
   public List<ToDoItem> getList() {
     List<String> fileLines = FileIOUtils.readAll();
-    List<ToDoItem> itemList = fileLines.stream().map(line -> CsvMapper.toObject(line))
+    List<ToDoItem> itemList = fileLines.stream()
+        .map(line -> CsvMapper.toObject(line))
         .collect(Collectors.toList());
     return itemList;
   }
@@ -35,6 +36,7 @@ public class ToDoListController {
 
   @PostMapping(value = "/item")
   public void saveItem(@RequestBody ToDoItem item) {
+    item.setId(FileIOUtils.nextId());
     String newLine = CsvMapper.toCsv(item);
     FileIOUtils.write(newLine);
     //return item;
