@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class FileIOUtils {
 
-  private static final String PATH_TO_FILE = "/Users/bpatlan/DevEnvironment/demo/src/main/resources/persistence/ToDoList.csv";
+  private static final String PATH_TO_FILE = "";
   private static final String CSV_SEPARATOR = ",";
 
   public static List<String> readAll() {
